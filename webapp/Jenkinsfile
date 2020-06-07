@@ -25,9 +25,7 @@ pipeline {
       }
     }
     stage('Publish') {
-      when {
-        branch 'master'
-      }
+  
       when{
         
   expression {
