@@ -25,13 +25,8 @@ pipeline {
       }
     }
     stage('Publish') {
-  
-      when{
-        
-  expression {
-  echo "BRANCH_NAME is ${env.BRANCH_NAME}"
-  return env.BRANCH_NAME == "master"
-}
+      when {
+        branch 'master'
       }
       steps {
         script {
@@ -46,7 +41,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        build job: 'deploy-webapp-staging', parameters: [string(name: 'ARTIFACT_ID', value: "${env.ARTIFACT_ID}")], wait: false
+        build job: 'deploy-webapp-staging', parameters: [string(name: 'ARTIFACT_ID', value: "${env.ARTIFACT_ID}")], wait: true
       }
     }
   }
