@@ -28,6 +28,13 @@ pipeline {
       when {
         branch 'master'
       }
+      when{
+        
+  expression {
+  echo "BRANCH_NAME is ${env.BRANCH_NAME}"
+  return env.BRANCH_NAME == "master"
+}
+      }
       steps {
         script {
           docker.withRegistry("", "DockerHubCredentials") {
@@ -45,9 +52,5 @@ pipeline {
       }
     }
   }
-  expression {
-  echo "BRANCH_NAME is ${env.BRANCH_NAME}"
-  return env.BRANCH_NAME == "master"
-}
 }
 
